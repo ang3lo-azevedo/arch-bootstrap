@@ -59,7 +59,8 @@ fi
 # Check if git is installed
 if ! command -v git &> /dev/null; then
     print_message "$YELLOW" "Git is not installed. Installing git..."
-    if ! sudo pacman -S --needed --noconfirm git; then
+    sudo pacman -S --needed --noconfirm git
+    if ! command -v git &> /dev/null; then
         print_message "$YELLOW" "Updating system and retrying git installation..."
         sudo pacman -Syu
         sudo pacman -S --needed --noconfirm git

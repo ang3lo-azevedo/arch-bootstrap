@@ -13,6 +13,10 @@ print_message() {
     echo -e "${color}${message}${NC}"
 }
 
+# Ensure we have a proper tty
+exec < /dev/tty
+exec > /dev/tty
+
 # Check if git is installed
 if ! command -v git &> /dev/null; then
     print_message "$YELLOW" "Git is not installed. Installing git..."

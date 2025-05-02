@@ -9,9 +9,6 @@ archinstall_menu() {
         
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
-        # Ensure we have a proper tty
-            exec < /dev/tty
-            exec > /dev/tty
         if [ $? -eq 0 ]; then
             sudo archinstall --config archinstall-config/user_configuration.json
         else

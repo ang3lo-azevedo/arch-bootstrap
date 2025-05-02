@@ -5,7 +5,7 @@ custom_arch_chroot() {
     local command="
         git clone $REPO_URL $REPO_DIR
         cd $REPO_DIR
-        source dialog_menus/menu_utils.sh
+        source ./dialog_menus/menu_utils.sh
         menu_after_chroot
     "
 

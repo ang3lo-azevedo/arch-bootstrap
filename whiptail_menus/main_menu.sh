@@ -45,6 +45,7 @@ menu() {
     archinstall_menu
 
     # Install all message
+    source "$dir/whiptail_menus/install_all_message/install_all_message.sh"
     install_all_message
 
     # If all is not selected, show the menus

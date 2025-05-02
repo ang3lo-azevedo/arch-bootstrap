@@ -38,7 +38,8 @@ install_all_menu() {
 # Function to show the main menu
 menu() {
     # Install dialog if not present
-    #sudo pacman -S --needed --noconfirm dialog
+    #install_package "dialog"
+    sudo pacman -S --needed --noconfirm dialog
 
     # Show the welcome screen
     welcome_screen

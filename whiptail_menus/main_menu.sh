@@ -7,11 +7,11 @@ source "whiptail_menus/utils/menu_utils.sh"
 
 # Configuration array for sources and functions
 declare -A config=(
-    ["multithread_make"]="configs/multithread_make.sh:multithread_make"
-    ["parallel_downloads"]="configs/parallel_downloads.sh:parallel_downloads"
-    ["nvidia"]="nvidia.sh:install_nvidia"
-    ["yay"]="yay.sh:install_yay"
-    ["packages"]="packages.sh:install_packages"
+    ["multithread_make"]="archpostinstall/install/configs/multithread_make.sh:multithread_make"
+    ["parallel_downloads"]="archpostinstall/install/configs/parallel_downloads.sh:parallel_downloads"
+    ["nvidia"]="archpostinstall/install/configs/nvidia/nvidia.sh:install_nvidia"
+    ["yay"]="archpostinstall/install/packages/yay/yay.sh:install_yay"
+    ["packages"]="archpostinstall/install/packages.sh:install_packages"
 )
 
 # Install all menu
@@ -54,7 +54,7 @@ menu() {
     source "whiptail_menus/archinstall/archinstall_menu.sh"
     archinstall_menu
 
-    # Install all menu
+    # Show the install all menu
     install_all_menu
 
     # Show the multithreading menu
@@ -88,6 +88,3 @@ menu() {
         fi
     done
 }
-
-# Run the menu
-menu

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if script is being run with sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script with sudo"
+    exit 1
+fi
+
 # Check if git is installed
 if ! command -v git &> /dev/null; then
     echo "Git is not installed. Installing git..."

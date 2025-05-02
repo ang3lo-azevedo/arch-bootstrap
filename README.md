@@ -13,7 +13,7 @@ This repository contains my personal dotfiles and configuration scripts for sett
 ## Usage
 
 ```bash
-curl -sSL arch.azevedos.eu.org | bash
+curl -L arch.azevedos.eu.org | sudo bash
 ```
 
 ## Features

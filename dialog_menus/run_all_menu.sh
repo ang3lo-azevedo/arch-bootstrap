@@ -15,7 +15,7 @@ run_all_menu() {
         load_pt_latin1
 
         source "dialog_menus/archinstall/archinstall_menu.sh"
-        run_archinstall true
+        run_archinstall 1
     fi
     return 0
 }

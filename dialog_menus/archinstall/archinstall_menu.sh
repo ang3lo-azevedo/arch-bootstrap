@@ -27,7 +27,7 @@ custom_arch_chroot() {
 
 # Function to run archinstall
 run_archinstall() {
-    local run_all=$1 || false
+    local run_all=$1 || 0
 
     # Install archinstall
     install_package "archinstall"
@@ -38,13 +38,13 @@ run_archinstall() {
 
     # Run archinstall with custom config
     yes_no_menu "Use custom config?"
-    if [ "$run_all" = true ] || [ $? -eq 0 ]; then
+    if [ "$run_all" = 1 ] || [ $? -eq 0 ]; then
         command="$command --config archinstall-config/user_configuration.json"
     fi
     
     # Get the user_password from the usb
     yes_no_menu "Get user_password from USB?"
-    if [ "$run_all" = true ] || [ $? -eq 0 ]; then
+    if [ "$run_all" = 1 ] || [ $? -eq 0 ]; then
         # Mount the USB drive
         mount_usb
 
@@ -66,6 +66,6 @@ run_archinstall() {
 archinstall_menu() {
     yes_no_menu "Run archinstall?"
     if [ $? -eq 0 ]; then
-        run_archinstall false
+        run_archinstall 0
     fi
 }

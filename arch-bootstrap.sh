@@ -2,7 +2,8 @@
 
 # Install dependencies
 echo "Installing git"
-sudo pacman -Sy --needed --noconfirm git
+sudo pacman -Sy
+sudo pacman -S --needed --noconfirm git
 
 # Clone the repository
 echo "Cloning the repository"

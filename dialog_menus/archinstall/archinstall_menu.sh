@@ -2,8 +2,16 @@
 
 # Function to mount the USB drive
 mount_usb() {
-    # Mount the USB drive
-    mount /dev/sdX1 /mnt
+    # Find the device with Ventoy partition
+    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//')
+    
+    if [ -z "$ventoy_device" ]; then
+        print_error "No device with Ventoy partition found"
+        return 1
+    fi
+
+    # Mount the second partition
+    mount "/dev/${ventoy_device}2" /mnt
 }
 
 # Function to run the main menu in the chroot environment

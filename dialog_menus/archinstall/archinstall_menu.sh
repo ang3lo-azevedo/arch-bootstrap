@@ -13,10 +13,27 @@ mount_usb() {
         return 1
     fi
 
-    echo "Ventoy device: $ventoy_device"
+    # Ensure the device exists
+    if [ ! -b "/dev/${ventoy_device}" ]; then
+        print_error "Device /dev/${ventoy_device} does not exist"
+        return 1
+    fi
 
-    # Mount the second partition
-    mount "/dev/${ventoy_device}1" /mnt/usb
+    # Create mount point if it doesn't exist
+    mkdir -p /mnt/usb
+
+    # Unmount if already mounted
+    if mountpoint -q /mnt/usb; then
+        umount /mnt/usb
+    fi
+
+    # Mount the first partition
+    if ! mount "/dev/${ventoy_device}1" /mnt/usb; then
+        print_error "Failed to mount /dev/${ventoy_device}1"
+        return 1
+    fi
+
+    echo "Successfully mounted /dev/${ventoy_device}1 to /mnt/usb"
 }
 
 # Function to run the main menu in the chroot environment

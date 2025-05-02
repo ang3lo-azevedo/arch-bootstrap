@@ -28,6 +28,7 @@ if ! command -v git &> /dev/null; then
         sudo pacman -Syu
         sudo pacman -S --needed --noconfirm git
         while ! command -v git &> /dev/null; do
+            sleep 5
             print_message "$RED" "Failed to install git. Retrying..."
             sudo pacman -Syu
             sudo pacman -S --needed --noconfirm git

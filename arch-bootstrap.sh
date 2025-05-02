@@ -37,7 +37,7 @@ if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
     # Only clone if the directory doesn't exist
     if [ ! -d "$REPO_DIR" ]; then
         print_message "$YELLOW" "Cloning the repository..."
-        if ! git clone "$REPO_URL" "$REPO_DIR"; then
+        if ! git clone "$REPO_URL" "$REPO_DIR" --recurse-submodules; then
             print_message "$RED" "Failed to clone repository. Please check your internet connection and try again."
             exit 1
         fi
@@ -54,7 +54,7 @@ fi
 
 # Update the repository
 print_message "$YELLOW" "Updating repository..."
-if ! git pull && git submodule update --recursive; then
+if ! git pull --recurse-submodules; then
     print_message "$RED" "Failed to update repository."
     exit 1
 fi

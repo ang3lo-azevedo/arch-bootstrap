@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Check if script is being run with sudo
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run this script with sudo"
-    exit 1
-fi
-
 # Check if running in interactive terminal
 if [ ! -t 1 ]; then
     echo "Script is being run in non-interactive mode. Downloading and executing locally..."

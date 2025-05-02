@@ -12,24 +12,15 @@ archinstall_menu() {
 
         # Install archinstall
         install_package "archinstall"
-
-        # Save current terminal settings
-        OLD_STTY=$(stty -g)
-        
-        # Configure terminal for raw mode
-        stty raw -echo -icanon -isig -ixon -iexten
         
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
-            archinstall --config "archinstall-config/user_configuration.json"
+            sudo sh -c "archinstall --config 'archinstall-config/user_configuration.json'"
         else
             # Run archinstall with default config
-            archinstall
+            sudo sh -c "archinstall"
         fi
-
-        # Restore terminal settings
-        stty "$OLD_STTY"
 
         # If the archinstall succeeds, run the post-installation script
         if [ $? -eq 0 ]; then

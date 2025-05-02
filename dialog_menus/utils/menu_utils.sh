@@ -6,11 +6,12 @@ source "bash-utils/utils.sh"
 # Function to get version from git
 get_git_version() {
     # Get the number of commits
-    local commit_count=$(git rev-list --count HEAD 2>/dev/null)
-    
-    if [ -n "$commit_count" ]; then
+    local general_commit_count=$(git rev-list --count HEAD 2>/dev/null)
+    local postinstall_commit_count=$(git rev-list --count HEAD -- archpostinstall/ 2>/dev/null)
+
+    if [ -n "$general_commit_count" ] && [ -n "$postinstall_commit_count" ]; then
         # Format as major.minor.patch where patch is the commit count
-        echo "0.0.$commit_count"
+        echo "0.$postinstall_commit_count.$general_commit_count"
     else
         echo "0.0.0-dev"
     fi

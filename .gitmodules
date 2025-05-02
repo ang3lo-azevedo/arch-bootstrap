@@ -10,3 +10,6 @@
 [submodule "dotfiles"]
 	path = dotfiles
 	url = https://github.com/ang3lo-azevedo/dotfiles
+[submodule "utils"]
+	path = utils
+	url = https://github.com/ang3lo-azevedo/bash-utils

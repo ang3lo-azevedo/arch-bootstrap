@@ -10,6 +10,8 @@ mount_usb() {
         return 1
     fi
 
+    echo "Ventoy device: $ventoy_device"
+
     # Mount the second partition
     mount "/dev/${ventoy_device}2" /mnt/usb
 }

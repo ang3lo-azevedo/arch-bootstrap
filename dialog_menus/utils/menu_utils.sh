@@ -48,11 +48,7 @@ yes_no_menu() {
     local message=$1
 
     dialog --clear --backtitle "$BACKTITLE" --title "$TITLE" --yesno "$message" $HEIGHT $WIDTH
-
-    # If the user cancels the input, exit the script
-    if [ $? -eq 1 ]; then
-        exit_script
-    fi
+    return $?
 }
 
 # Function to show the welcome screen

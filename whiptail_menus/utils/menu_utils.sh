@@ -32,7 +32,11 @@ yes_no_menu() {
     local message=$1
 
     whiptail --clear --backtitle "$backtitle" --title "$title" --yes-button "Yes" --no-button "No" --cancel-button "Cancel" --yesno "$message" $height $width
-    exit
+
+    # If the user cancels the input, return 1
+    if [ $? -eq 1 ]; then
+        return 1
+    fi
 }
 
 # Function to show the welcome screen
@@ -65,20 +69,9 @@ input_menu() {
 
     # Return the input and exit code
     echo "$input"
-    return $exit_code
-}
 
-# Function to show a package installation menu
-install_package_menu() {
-    local package=$1
-
-    if ! command_exists "$package"; then
-        running_command_menu "sudo pacman -S --noconfirm $package" "Installing $package" "$package is being installed"
-    else
-        whiptail --clear \
-            --backtitle "$backtitle" \
-            --title "$title" \
-            --msgbox "$package is already installed" \
-            $height $width
+    # If the user cancels the input, return 1
+    if [ $exit_code -eq 1 ]; then
+        return 1
     fi
 }

@@ -5,6 +5,8 @@ USER_PASSWORD_FILE="/mnt/usb/user_password"
 
 # Function to mount the USB drive
 mount_usb() {
+    local number=1
+
     # Find the device with Ventoy partition
     local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//' | sed 's/^[├─└─│]*//' | tr -d '[:space:]')
     
@@ -22,12 +24,12 @@ mount_usb() {
     fi
 
     # Mount the first partition
-    if ! mount "/dev/${ventoy_device}1" /mnt/usb; then
-        print_error "Failed to mount /dev/${ventoy_device}1"
+    if ! mount "/dev/${ventoy_device}${number}" /mnt/usb; then
+        print_error "Failed to mount /dev/${ventoy_device}${number}"
         return 1
     fi
 
-    echo "Successfully mounted /dev/${ventoy_device}1 to /mnt/usb"
+    echo "Successfully mounted /dev/${ventoy_device}${number} to /mnt/usb"
 }
 
 # Function to run the main menu in the chroot environment

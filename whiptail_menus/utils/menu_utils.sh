@@ -72,15 +72,32 @@ running_command_menu() {
     local title=$2
     local message=$3
     
-    # Execute the command and capture its output
-    output=$(eval "$command" 2>&1)
+    # Create a temporary file for the output
+    local temp_file=$(mktemp)
     
-    # Show the output in the whiptail menu
+    # Execute the command in background and redirect output to temp file
+    (eval "$command" 2>&1 | tee "$temp_file") &
+    local pid=$!
+    
+    # Show the output in real-time using whiptail
+    while kill -0 $pid 2>/dev/null; do
+        whiptail --clear \
+            --backtitle "$backtitle" \
+            --title "$title" \
+            --msgbox "$message\n\n$(cat "$temp_file")" \
+            $height $width
+        sleep 1
+    done
+    
+    # Show final output
     whiptail --clear \
         --backtitle "$backtitle" \
         --title "$title" \
-        --msgbox "$message\n\n$output" \
+        --msgbox "$message\n\n$(cat "$temp_file")" \
         $height $width
+    
+    # Clean up
+    rm -f "$temp_file"
 }
 
 # Function to show a package installation menu

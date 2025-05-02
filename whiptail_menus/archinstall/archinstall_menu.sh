@@ -21,5 +21,10 @@ archinstall_menu() {
             # Run archinstall with default config
             archinstall
         fi
+
+        # If the archinstall succeeds, run the post-installation script
+        if [ $? -eq 0 ]; then
+            arch-chroot /mnt 
+        fi
     fi
 }

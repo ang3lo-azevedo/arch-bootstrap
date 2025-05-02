@@ -6,8 +6,8 @@ source "utils/utils.sh"
 # Set the variables
 backtitle="Ângelo's Arch Linux Installation"
 title="Installation Options"
-height=8
-width=40
+height=15
+width=50
 
 # Get the number of CPU cores
 cpu_cores=$(nproc)

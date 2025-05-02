@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Source the bash utils
+source "bash-utils/utils.sh"
+
+# Source the menu utils
+source "dialog_menus/utils/menu_utils.sh"
+
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
     local command="

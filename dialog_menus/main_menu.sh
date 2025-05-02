@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Source the bash utils
+source "bash-utils/utils.sh"
+
 # Source the menu utils
 source "dialog_menus/utils/menu_utils.sh"
 
@@ -83,8 +86,7 @@ menu() {
     exec > /dev/tty
 
     # Install dialog if not present
-    #install_package "dialog"
-    sudo pacman -S --needed --noconfirm dialog
+    install_package "dialog"
 
     # Show the welcome screen
     welcome_screen

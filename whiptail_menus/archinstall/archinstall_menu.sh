@@ -7,16 +7,13 @@ source "whiptail_menus/utils/menu_utils.sh"
 archinstall_menu() {
     yes_no_menu "Run archinstall?"
     if [ $? -eq 0 ]; then
-        # Run the run with sudo menu
-        source "whiptail_menus/run_with_sudo/run_with_sudo_menu.sh"
-
         # Install archinstall
         install_package "archinstall"
         
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
-            sudo sh -c "archinstall --config 'archinstall-config/user_configuration.json'"
+            sudo sh -c "archinstall --config archinstall-config/user_configuration.json"
         else
             # Run archinstall with default config
             sudo sh -c "archinstall"

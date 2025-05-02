@@ -34,12 +34,13 @@ fi
 
 # Check if already inside the repository directory
 REPO_DIR="arch-bootstrap"
-REPO_URL="https://github.com/ang3lo-azevedo/arch-bootstrap.git"
+REPO_URL="https://github.com/ang3lo-azevedo/arch-bootstrap"
 
 if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
     # Only clone if the directory doesn't exist
     if [ ! -d "$REPO_DIR" ]; then
         echo "Cloning the repository"
+        git config
         git clone "$REPO_URL"
     fi
     cd "$REPO_DIR" || exit

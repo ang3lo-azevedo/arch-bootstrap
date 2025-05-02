@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Source the utils
-source "utils/utils.sh"
+source "../../utils/utils.sh"
 
 # Set the variables
 backtitle="Ângelo's Arch Linux Installation"

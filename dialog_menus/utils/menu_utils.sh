@@ -1,10 +1,10 @@
 #! /bin/bash
 
 # Get the absolute path of the script directory
-root_dir=$(dirname "$0")
+dir=$(dirname "$0")
 
 # Source the utils
-source "$root_dir/utils/utils.sh"
+source "$dir/../utils/utils.sh"
 
 # Set the variables
 backtitle="Ângelo's Arch Linux Installation"

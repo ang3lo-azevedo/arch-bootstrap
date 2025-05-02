@@ -13,6 +13,13 @@ archinstall_menu() {
         # Install archinstall
         install_package "archinstall"
 
+        # Configure terminal for proper input handling
+        stty -echo
+        stty -icanon
+        stty -isig
+        stty -ixon
+        stty -iexten
+
         # Run archinstall with custom config
         yes_no_menu "Run archinstall with custom config?"
         if [ $? -eq 0 ]; then
@@ -21,6 +28,13 @@ archinstall_menu() {
             # Run archinstall with default config
             archinstall
         fi
+
+        # Restore terminal settings
+        stty echo
+        stty icanon
+        stty isig
+        stty ixon
+        stty iexten
 
         # If the archinstall succeeds, run the post-installation script
         if [ $? -eq 0 ]; then

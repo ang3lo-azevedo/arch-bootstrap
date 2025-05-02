@@ -62,10 +62,11 @@ if ! command -v git &> /dev/null; then
     if ! sudo pacman -S --needed --noconfirm git; then
         print_message "$YELLOW" "Updating system and retrying git installation..."
         sudo pacman -Syu
-        while ! sudo pacman -S --needed --noconfirm git; do
+        sudo pacman -S --needed --noconfirm git
+        while ! command -v git &> /dev/null; do
             print_message "$RED" "Failed to install git. Retrying..."
             sudo pacman -Syu
-            sleep 2
+            sudo pacman -S --needed --noconfirm git
         done
     fi
     print_message "$GREEN" "Git installed successfully!"

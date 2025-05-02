@@ -97,6 +97,3 @@ menu() {
         fi
     done
 }
-
-# Run the menu
-menu

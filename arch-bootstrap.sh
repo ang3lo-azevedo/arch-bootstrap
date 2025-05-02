@@ -1,19 +1,33 @@
 #!/bin/bash
 
-# Install dependencies
-echo "Installing git"
-sudo pacman -Sy
-sudo pacman -S --needed --noconfirm git
+# Check if git is installed
+if ! command -v git &> /dev/null; then
+    echo "Git is not installed. Installing git..."
+    sudo pacman -Sy
+    sudo pacman -S --needed --noconfirm git
+else
+    echo "Git is already installed."
+fi
 
-# Clone the repository
-echo "Cloning the repository"
-git clone https://github.com/ang3lo-azevedo/arch-bootstrap.git
+# Check if already inside the repository directory
+REPO_DIR="arch-bootstrap"
+REPO_URL="https://github.com/ang3lo-azevedo/arch-bootstrap.git"
 
-# Change to the repository directory
-cd arch-bootstrap || exit
+if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
+    # Only clone if the directory doesn't exist
+    if [ ! -d "$REPO_DIR" ]; then
+        echo "Cloning the repository"
+        git clone "$REPO_URL"
+    fi
+    cd "$REPO_DIR" || exit
+else
+    echo "Already inside the $REPO_DIR directory."
+fi
 
 # Update the repository
-git pull --recurse-submodules
+if [ -d .git ]; then
+    git pull --recurse-submodules
+fi
 
-# Run menu
-sudo ./whiptail_menus/main_menu.sh
+# Run menu as root
+sudo su -c menu

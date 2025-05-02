@@ -37,6 +37,10 @@ install_all_menu() {
 
 # Function to show the main menu
 menu() {
+    # Ensure we have a proper tty
+    exec < /dev/tty
+    exec > /dev/tty
+
     # Install dialog if not present
     #install_package "dialog"
     sudo pacman -S --needed --noconfirm dialog

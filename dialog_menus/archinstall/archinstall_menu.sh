@@ -1,13 +1,13 @@
 #!/bin/bash
 
 CONFIG_FILE="archinstall-config/user_configuration.json"
-USER_PASSWORD_FILE="/mnt/usb/user_password"
 
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
     local command="
         git clone $REPO_URL $REPO_DIR
         cd $REPO_DIR
+        sudo chmod +x dialog_menus/menu_after_chroot.sh
         ./dialog_menus/menu_after_chroot.sh
     "
 

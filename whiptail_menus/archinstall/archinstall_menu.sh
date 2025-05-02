@@ -1,32 +1,29 @@
 #!/bin/bash
 
-# Set the directory
-dir=$(dirname "$0")
-
-# Source the utils
-source "$dir/utils/utils.sh"
-
 # Source the menu utils
-source "$dir/whiptail_menus/utils/utils.sh"
+source "whiptail_menus/utils/menu_utils.sh"
 
 # Function to show the archinstall menu
 archinstall_menu() {
     yes_no_menu "Run archinstall?"
     if [ $? -eq 0 ]; then
         # Run the run with sudo menu
-        source "$dir/whiptail_menus/run_with_sudo/run_with_sudo_menu.sh"
+        source "whiptail_menus/run_with_sudo/run_with_sudo_menu.sh"
         run_with_sudo
 
         # Install archinstall
-        install_package "archinstall"
+        install_package_menu "archinstall"
 
         # Run archinstall with custom config
-        yes_no_menu "Run archinstall with custom config?"
+        yes_no_menu "Use custom config?"
+        local title="Running archinstall"
         if [ $? -eq 0 ]; then
-            archinstall --config "$dir/archinstall-config/user_configuration.json"
+            local command="archinstall --config 'archinstall-config/user_configuration.json'"
+            local title="$title with custom config"
         else
-            # Run archinstall with default config
-            archinstall
+            local command="archinstall"
         fi
+
+        running_command_menu "$command" "$title" "$title"
     fi
 }

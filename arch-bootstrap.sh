@@ -29,5 +29,8 @@ if [ -d .git ]; then
     git pull --recurse-submodules
 fi
 
-# Run menu as root
-sudo su -c menu
+# Source the menu script
+source "whiptail_menus/main_menu.sh"
+
+# Run the menu
+menu

@@ -3,3 +3,5 @@
 
 # archinstall
 user_credentials.json
+cmd_history.txt
+install.log

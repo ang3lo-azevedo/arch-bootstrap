@@ -15,21 +15,28 @@ not_sudo_message="You need to run with sudo"
 
 # Function to show the not sudo menu
 not_sudo_menu() {
-    whiptail --backtitle "$backtitle" --title "$not_sudo_title" --msgbox "$not_sudo_message" 10 30
-    run_with_sudo_menu
+    whiptail --backtitle "$backtitle" --title "$not_sudo_title" --msgbox "$not_sudo_message" $height $width
+    # Request sudo privileges and restart the script
+    exec sudo -E "$0" "$@"
 }
 
 # Function to show the run with sudo menu
 run_with_sudo_menu() {
     yes_no_menu "Run with sudo?"
     if [ $? -eq 0 ]; then
-        sudo su
+        # Request sudo privileges and restart the script
+        exec sudo -E "$0" "$@"
     fi
 }
 
 # Function to check if the user is root and show the not root menu if not
 run_with_sudo() {
     if [ "$EUID" -ne 0 ]; then
-        not_sudo_menu
+        not_sudo_menu "$@"
     fi
 }
+
+# Main execution
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    run_with_sudo "$@"
+fi

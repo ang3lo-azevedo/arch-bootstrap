@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# Get the absolute path of the script directory
+root_dir=$(dirname "$0")
+
+# Source the utils
+source "$root_dir/utils/utils.sh"
+
 # Set the variables
 backtitle="Ângelo's Arch Linux Installation"
 title="Installation Options"
@@ -58,4 +64,36 @@ input_menu() {
 
     # Return the input
     echo "$input"
+}
+
+# Function to show a command output menu
+running_command_menu() {
+    local command=$1
+    local title=$2
+    local message=$3
+    
+    # Execute the command and capture its output
+    output=$(eval "$command" 2>&1)
+    
+    # Show the output in the whiptail menu
+    whiptail --clear \
+        --backtitle "$backtitle" \
+        --title "$title" \
+        --msgbox "$message\n\n$output" \
+        $height $width
+}
+
+# Function to show a package installation menu
+install_package_menu() {
+    local package=$1
+
+    if ! command_exists "$package"; then
+        running_command_menu "sudo pacman -S --noconfirm $package" "Installing $package" "$package is being installed"
+    else
+        whiptail --clear \
+            --backtitle "$backtitle" \
+            --title "$title" \
+            --msgbox "$package is already installed" \
+            $height $width
+    fi
 }

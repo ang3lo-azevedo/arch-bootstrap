@@ -21,8 +21,7 @@ fi
 
 # Install git
 print_message "$YELLOW" "Git is not installed. Installing git..."
-sudo pacman -Syu
-sudo pacman -S --noconfirm git
+sudo pacman -Syu && sudo pacman -S --noconfirm git
 print_message "$GREEN" "Git installed successfully!"
 
 # Repository information

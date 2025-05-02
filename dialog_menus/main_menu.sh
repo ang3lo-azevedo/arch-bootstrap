@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# Change to the directory of the script
-cd "../"
-
 # Source the bash utils
-source "bash-utils/utils.sh"
+#source "bash-utils/utils.sh"
 
 # Source the menu utils
 source "dialog_menus/utils/menu_utils.sh"

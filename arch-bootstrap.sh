@@ -22,4 +22,4 @@ source "utils/utils.sh"
 source "whiptail_menus/main_menu.sh"
 
 # Run menu
-menu
+sudo ./whiptail_menus/main_menu.sh

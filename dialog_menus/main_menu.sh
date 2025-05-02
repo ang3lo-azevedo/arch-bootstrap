@@ -39,7 +39,6 @@ install_all_menu() {
 menu() {
     # Install dialog if not present
     #sudo pacman -S --needed --noconfirm dialog
-    install_package "dialog"
 
     # Show the welcome screen
     welcome_screen

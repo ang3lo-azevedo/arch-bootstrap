@@ -21,6 +21,9 @@ choices=()
 thread_count=0
 parallel_downloads=0
 
+# Install dialog if not present
+install_package "dialog"
+
 # Function to show a yes/no menu
 yes_no_menu() {
     local message=$1

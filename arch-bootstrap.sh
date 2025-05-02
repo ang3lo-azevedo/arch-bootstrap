@@ -10,7 +10,7 @@ echo "Cloning the repository"
 git clone https://github.com/ang3lo-azevedo/arch-bootstrap.git
 
 # Change to the repository directory
-cd arch-bootstrap
+cd arch-bootstrap || exit
 
 # Get the submodules
 git submodule update --init --recursive

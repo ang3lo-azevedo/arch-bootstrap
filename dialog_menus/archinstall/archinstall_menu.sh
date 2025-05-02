@@ -6,16 +6,10 @@ USER_PASSWORD_FILE="/mnt/usb/user_password"
 # Function to mount the USB drive
 mount_usb() {
     # Find the device with Ventoy partition
-    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//' | sed 's/^[├─└─]*//')
+    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//' | sed 's/^[├─└─│]*//' | tr -d '[:space:]')
     
     if [ -z "$ventoy_device" ]; then
         print_error "No device with Ventoy partition found"
-        return 1
-    fi
-
-    # Ensure the device exists
-    if [ ! -b "/dev/${ventoy_device}" ]; then
-        print_error "Device /dev/${ventoy_device} does not exist"
         return 1
     fi
 

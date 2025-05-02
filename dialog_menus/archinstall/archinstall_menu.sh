@@ -3,35 +3,6 @@
 CONFIG_FILE="archinstall-config/user_configuration.json"
 USER_PASSWORD_FILE="/mnt/usb/user_password"
 
-# Function to mount the USB drive
-mount_usb() {
-    local number=1
-
-    # Find the device with Ventoy partition
-    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//' | sed 's/^[├─└─│]*//' | tr -d '[:space:]')
-    
-    if [ -z "$ventoy_device" ]; then
-        print_error "No device with Ventoy partition found"
-        return 1
-    fi
-
-    # Create mount point if it doesn't exist
-    mkdir -p /mnt/usb
-
-    # Unmount if already mounted
-    if mountpoint -q /mnt/usb; then
-        umount /mnt/usb
-    fi
-
-    # Mount the first partition
-    if ! mount "/dev/${ventoy_device}${number}" /mnt/usb; then
-        print_error "Failed to mount /dev/${ventoy_device}${number}"
-        return 1
-    fi
-
-    echo "Successfully mounted /dev/${ventoy_device}${number} to /mnt/usb"
-}
-
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
     local command="
@@ -71,27 +42,17 @@ archinstall_menu() {
 
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
-        if [ "$run_all" -eq 0 ] || [ $? -eq 0 ]; then
+        if [ $? -eq 0 ]; then
             command="$command --config $CONFIG_FILE"
-        fi
-        
-        # Get the user_password from the usb
-        yes_no_menu "Get user_password from USB?"
-        if [ "$run_all" -eq 0 ] || [ $? -eq 0 ]; then
-            # Mount the USB drive
-            mount_usb
-
-            # Get the user_password from the usb
-            #command="$command --user_password $(cat /mnt/usb/user_password)"
         fi
 
         # Run the command
-        #$command
+        $command
 
         # If the archinstall succeeds, enter the chroot environment
-        # if [ "$run_all" = true ] || [ $? -eq 0 ]; then
-        #   print_status "Entering chroot environment"
-        #   custom_arch_chroot
-        # fi
+        if [ $? -eq 0 ]; then
+            print_status "Entering chroot environment"
+            custom_arch_chroot
+        fi
     fi
 }

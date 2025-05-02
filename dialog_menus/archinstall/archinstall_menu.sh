@@ -10,10 +10,10 @@ archinstall_menu() {
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
-            sudo sh -c "archinstall --config archinstall-config/user_configuration.json"
+            sudo archinstall --config archinstall-config/user_configuration.json
         else
             # Run archinstall with default config
-            sudo sh -c "archinstall"
+            sudo archinstall
         fi
 
         # If the archinstall succeeds, run the post-installation script

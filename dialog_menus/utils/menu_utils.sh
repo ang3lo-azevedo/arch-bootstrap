@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# Source the utils
-source "utils/utils.sh"
+# Source the bash utils
+source "bash-utils/utils.sh"
 
 # Set the variables
 MENU_DIR="$(dirname "$(dirname "${BASH_SOURCE[0]}")")"

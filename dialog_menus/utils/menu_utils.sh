@@ -21,21 +21,32 @@ choices=()
 thread_count=0
 parallel_downloads=0
 
+# Function to handle script exit
+exit_script() {
+    dialog --clear --backtitle "$BACKTITLE" --title "Exit" --msgbox "Installation cancelled. Exiting..." $HEIGHT $WIDTH
+    exit 0
+}
+
 # Function to show a yes/no menu
 yes_no_menu() {
     local message=$1
 
     dialog --clear --backtitle "$BACKTITLE" --title "$TITLE" --yesno "$message" $HEIGHT $WIDTH
 
-    # If the user cancels the input, return 1
+    # If the user cancels the input, exit the script
     if [ $? -eq 1 ]; then
-        return 1
+        exit_script
     fi
 }
 
 # Function to show the welcome screen
 welcome_screen() {
     dialog --clear --backtitle "$BACKTITLE" --title "$TITLE" --msgbox "Welcome to $SCRIPT_NAME \nv$VERSION by $AUTHOR" $HEIGHT $WIDTH
+    
+    # If the user cancels, exit the script
+    if [ $? -eq 1 ]; then
+        exit_script
+    fi
 }
 
 # Function to show an input menu
@@ -57,13 +68,10 @@ input_menu() {
     local exit_code=$?
     if [ $exit_code -eq 0 ]; then
         choices+=("$choice")
+    else
+        exit_script
     fi
 
     # Return the input and exit code
     echo "$input"
-
-    # If the user cancels the input, return 1
-    if [ $exit_code -eq 1 ]; then
-        return 1
-    fi
 }

@@ -7,19 +7,14 @@ archinstall_menu() {
         # Install archinstall
         install_package "archinstall"
         
-        # Clear the screen and reset terminal
-        clear
-        reset
-        
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
+        # Ensure we have a proper tty
+            exec < /dev/tty
+            exec > /dev/tty
         if [ $? -eq 0 ]; then
-            # Ensure we're in a clean terminal state
-            stty sane
             sudo archinstall --config archinstall-config/user_configuration.json
         else
-            # Ensure we're in a clean terminal state
-            stty sane
             sudo archinstall
         fi
 

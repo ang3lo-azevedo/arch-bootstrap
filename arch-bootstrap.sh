@@ -13,16 +13,17 @@ print_message() {
     echo -e "${color}${message}${NC}"
 }
 
-# Check for internet connectivity
-if ! ping -c 1 archlinux.org &> /dev/null; then
-    print_message "$RED" "No internet connection. Please check your network."
-    exit 1
+# Check if git is installed
+if ! command -v git &> /dev/null; then
+    print_message "$YELLOW" "Git is not installed. Installing git..."
+    while ! sudo pacman -S --needed --noconfirm git; do
+        print_message "$YELLOW" "Updating system and retrying git installation..."
+        sudo pacman -Sy
+    done
+    print_message "$GREEN" "Git installed successfully!"
+else
+    print_message "$GREEN" "Git is already installed."
 fi
-
-# Install git
-print_message "$YELLOW" "Git is not installed. Installing git..."
-sudo pacman -Syu && sudo pacman -S --noconfirm git
-print_message "$GREEN" "Git installed successfully!"
 
 # Repository information
 REPO_DIR="arch-bootstrap"

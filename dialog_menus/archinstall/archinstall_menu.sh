@@ -18,8 +18,9 @@ archinstall_menu() {
             sudo archinstall
         fi
 
-        # If the archinstall succeeds, run the post-installation script
+        # If the archinstall succeeds, enter the chroot environment
         if [ $? -eq 0 ]; then
+            print_status "Entering chroot environment"
             arch-chroot /mnt 
         fi
     fi

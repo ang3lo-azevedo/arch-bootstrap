@@ -8,6 +8,7 @@ This repository is a work in progress and is not ready for production use.
 
 ## TODO
 
+- [ ] Add persistence in ventoy so that I can get the my user passwords from the usb
 - [ ] Improve the overall code
 - [ ] Add a way to import the dotfiles
 

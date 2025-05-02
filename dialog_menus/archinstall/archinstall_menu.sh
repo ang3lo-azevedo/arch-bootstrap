@@ -6,6 +6,12 @@ source "bash-utils/utils.sh"
 # Source the menu utils
 source "dialog_menus/utils/menu_utils.sh"
 
+# Function to mount the USB drive
+mount_usb() {
+    # Mount the USB drive
+    mount /dev/sdX1 /mnt
+}
+
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
     local command="
@@ -24,13 +30,28 @@ archinstall_menu() {
         # Install archinstall
         install_package "archinstall"
         
+        local command="
+            sudo archinstall
+        "
+
         # Run archinstall with custom config
         yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
-            sudo archinstall --config archinstall-config/user_configuration.json
-        else
-            sudo archinstall
+            command="$command --config archinstall-config/user_configuration.json"
         fi
+        
+        # Get the user_password from the usb
+        yes_no_menu "Get user_password from USB?"
+        if [ $? -eq 0 ]; then
+            # Mount the USB drive
+            mount_usb
+
+            # Get the user_password from the usb
+            command="$command --user_password $(cat /mnt/user_password)"
+        fi
+
+        # Run the command
+        $command
 
         # If the archinstall succeeds, enter the chroot environment
         if [ $? -eq 0 ]; then

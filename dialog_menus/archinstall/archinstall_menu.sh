@@ -3,7 +3,7 @@
 # Function to mount the USB drive
 mount_usb() {
     # Find the device with Ventoy partition
-    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//')
+    local ventoy_device=$(lsblk -o NAME,LABEL | grep -i ventoy | awk '{print $1}' | sed 's/[0-9]*$//' | tr -d '-')
     
     if [ -z "$ventoy_device" ]; then
         print_error "No device with Ventoy partition found"

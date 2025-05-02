@@ -19,12 +19,10 @@ if ! ping -c 1 archlinux.org &> /dev/null; then
     exit 1
 fi
 
-# Check if git is installed
-while ! command -v git &> /dev/null; do
-    print_message "$YELLOW" "Git is not installed. Installing git..."
-    sudo pacman -Syu
-    sudo pacman -S --needed --noconfirm git
-done
+# Install git
+print_message "$YELLOW" "Git is not installed. Installing git..."
+sudo pacman -Syu
+sudo pacman -S --needed --noconfirm git
 print_message "$GREEN" "Git installed successfully!"
 
 # Repository information

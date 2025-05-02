@@ -5,20 +5,14 @@ source "bash-utils/utils.sh"
 
 # Function to get version from git
 get_git_version() {
-    # Try to get the latest tag
-    local git_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+    # Get the number of commits
+    local commit_count=$(git rev-list --count HEAD 2>/dev/null)
     
-    if [ -n "$git_tag" ]; then
-        # If we have a tag, use it
-        echo "$git_tag"
+    if [ -n "$commit_count" ]; then
+        # Format as major.minor.patch where patch is the commit count
+        echo "0.0.$commit_count"
     else
-        # If no tag, use commit hash
-        local git_hash=$(git rev-parse --short HEAD 2>/dev/null)
-        if [ -n "$git_hash" ]; then
-            echo "0.0.0-$git_hash"
-        else
-            echo "0.0.0-dev"
-        fi
+        echo "0.0.0-dev"
     fi
 }
 

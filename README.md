@@ -2,6 +2,15 @@
 
 This repository is what I use to bootstrap a new Arch Linux system.
 
+## Development
+
+This repository is a work in progress and is not ready for production use.
+
+## TODO
+
+- [ ] Improve the overall code
+- [ ] Add a way to import the dotfiles
+
 ## Overview
 
 This repository contains my personal dotfiles and configuration scripts for setting up a fresh Arch Linux installation. The setup is designed to be automated and reproducible.

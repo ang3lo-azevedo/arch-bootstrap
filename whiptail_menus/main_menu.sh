@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Source the menu utils
 source "whiptail_menus/utils/menu_utils.sh"
 
@@ -58,18 +56,23 @@ menu() {
     install_all_menu
 
     # Show the multithreading menu
+    source "whiptail_menus/multithread_makepkg/multithread_makepkg_menu.sh"
     multithread_makepkg_menu
 
     # Show the pacman parallel downloads menu
+    source "whiptail_menus/pacman_parallel_downloads/pacman_parallel_downloads_menu.sh"
     pacman_parallel_downloads_menu
 
     # Show the yay menu
+    source "whiptail_menus/yay/yay_menu.sh"
     yay_menu
 
     # Show the NVIDIA drivers menu
+    source "whiptail_menus/nvidia_drivers/nvidia_drivers_menu.sh"
     nvidia_drivers_menu
 
     # Show the customize packages menu
+    source "whiptail_menus/customize_packages/customize_packages_menu.sh"
     customize_packages_menu
 
 

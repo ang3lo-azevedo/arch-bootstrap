@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Source the bash utils
-source "bash-utils/utils.sh"
-
 # Source the menu utils
 source "dialog_menus/utils/menu_utils.sh"
 

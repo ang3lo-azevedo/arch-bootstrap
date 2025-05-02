@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
+
+# Source the bash utils
+source "$PROJECT_ROOT/bash-utils/utils.sh"
+
 # Function to get version from git
 get_git_version() {
     # Get the number of commits excluding dotfiles

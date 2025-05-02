@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
-
-# Source the bash utils
-source "$PROJECT_ROOT/bash-utils/utils.sh"
-
-# Source the menu utils
-source "$PROJECT_ROOT/dialog_menus/utils/menu_utils.sh"
-
 # Function to mount the USB drive
 mount_usb() {
     # Mount the USB drive

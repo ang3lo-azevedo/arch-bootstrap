@@ -57,7 +57,7 @@ yes_no_menu() {
 
 # Function to show the welcome screen
 welcome_screen() {
-    dialog --clear --backtitle "$BACKTITLE" --title "$TITLE" --msgbox "Welcome to $SCRIPT_NAME \nv$VERSION by $AUTHOR" $HEIGHT $WIDTH
+    dialog --clear --backtitle "$BACKTITLE" --title "$TITLE" --msgbox "Welcome to $SCRIPT_NAME \nv$VERSION \nby $AUTHOR" $HEIGHT $WIDTH
     
     # If the user cancels, exit the script
     if [ $? -eq 1 ]; then

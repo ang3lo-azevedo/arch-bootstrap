@@ -49,7 +49,7 @@ archinstall_menu() {
             mount_usb
 
             # Get the user_password from the usb
-            command="$command --user_password $(cat /mnt/user_password)"
+            #command="$command --user_password $(cat /mnt/user_password)"
         fi
 
         # Run the command

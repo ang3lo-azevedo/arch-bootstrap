@@ -31,7 +31,7 @@ yes_no_menu() {
 
 # Function to show the welcome screen
 welcome_screen() {
-    dialog --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to my Arch Linux Installation" $height $width
+    dialog --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to my Arch Linux Installation \nv$version" $height $width
 }
 
 # Function to show an input menu

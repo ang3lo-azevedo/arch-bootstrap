@@ -3,13 +3,16 @@
 # Source the menu utils
 source "dialog_menus/utils/menu_utils.sh"
 
+# Configure variables
+POSTINSTALL_DIR="archpostinstall/install"
+
 # Configuration array for sources and functions
 declare -A config=(
-    ["multithread_make"]="archpostinstall/install/configs/multithread_make.sh:multithread_make"
-    ["parallel_downloads"]="archpostinstall/install/configs/parallel_downloads.sh:parallel_downloads"
-    ["nvidia"]="archpostinstall/install/configs/nvidia/nvidia.sh:install_nvidia"
-    ["yay"]="archpostinstall/install/packages/yay/yay.sh:install_yay"
-    ["packages"]="archpostinstall/install/packages.sh:install_packages"
+    ["multithread_make"]="$POSTINSTALL_DIR/configs/multithread_make.sh:multithread_make"
+    ["parallel_downloads"]="$POSTINSTALL_DIR/configs/parallel_downloads.sh:parallel_downloads"
+    ["nvidia"]="$POSTINSTALL_DIR/configs/nvidia/nvidia.sh:install_nvidia"
+    ["yay"]="$POSTINSTALL_DIR/packages/yay/yay.sh:install_yay"
+    ["packages"]="$POSTINSTALL_DIR/packages.sh:install_packages"
 )
 
 # Install all menu

@@ -3,12 +3,6 @@
 # Set the directory
 dir=$(dirname "$0")
 
-# Source the utils
-source "$dir/utils/utils.sh"
-
-# Source the menu utils
-source "$dir/whiptail_menus/utils/utils.sh"
-
 # Set the variables
 multithread_makepkg_menu_message="Enable multithreading in makepkg?"
 multithread_makepkg_menu_title="Thread Count"

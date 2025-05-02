@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Source the menu utils
-source "whiptail_menus/utils/menu_utils.sh"
-
 # Function to show the archinstall menu
 archinstall_menu() {
     yes_no_menu "Run archinstall?"

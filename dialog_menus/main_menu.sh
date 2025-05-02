@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the menu utils
-source "whiptail_menus/utils/menu_utils.sh"
+source "dialog_menus/utils/menu_utils.sh"
 
 # Configuration array for sources and functions
 declare -A config=(
@@ -34,8 +34,8 @@ install_all_menu() {
 
 # Function to show the main menu
 menu() {
-    # Install whiptail if not present
-    install_whiptail
+    # Install dialog if not present
+    install_package "dialog"
 
     # Show the welcome screen
     welcome_screen

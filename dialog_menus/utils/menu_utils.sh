@@ -9,7 +9,7 @@ source "$root_dir/utils/utils.sh"
 # Set the variables
 backtitle="Ângelo's Arch Linux Installation"
 title="Installation Options"
-height=8
+height=10
 width=60
 
 # Get the number of CPU cores
@@ -19,19 +19,11 @@ choices=()
 thread_count=0
 parallel_downloads=0
 
-# Function to install whiptail if not present
-install_whiptail() {
-    if ! command_exists "whiptail"; then
-        print_status "Installing whiptail..."
-        sudo pacman -S --noconfirm whiptail
-    fi
-}
-
 # Function to show a yes/no menu
 yes_no_menu() {
     local message=$1
 
-    whiptail --clear --backtitle "$backtitle" --title "$title" --yes-button "Yes" --no-button "No" --cancel-button "Cancel" --yesno "$message" $height $width
+    dialog --clear --backtitle "$backtitle" --title "$title" --yesno "$message" $height $width
 
     # If the user cancels the input, return 1
     if [ $? -eq 1 ]; then
@@ -41,7 +33,7 @@ yes_no_menu() {
 
 # Function to show the welcome screen
 welcome_screen() {
-    whiptail --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to my Arch Linux Installation" $height $width
+    dialog --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to my Arch Linux Installation" $height $width
 }
 
 # Function to show an input menu
@@ -52,13 +44,11 @@ input_menu() {
     local default_value=$4 || $cpu_cores
 
     # Get number of threads
-    input=$(whiptail --clear \
+    input=$(dialog --clear \
         --backtitle "$backtitle" \
         --title "$title" \
         --inputbox "$inputbox" \
-        --ok-button "OK" \
-        --cancel-button "Cancel" \
-        "$height" "$width" \
+        $height $width \
         "$default_value" \
         3>&1 1>&2 2>&3)
     

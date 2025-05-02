@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Set the directory
-dir=$(dirname "$0")
-
-# Source the utils
-source "$dir/utils/utils.sh"
-
-# Source the menu utils
-source "$dir/whiptail_menus/utils/utils.sh"
-
 # Set the variables
 pacman_parallel_downloads_menu_message="Enable parallel downloads in pacman?"
 pacman_parallel_downloads_menu_title="Parallel Downloads"

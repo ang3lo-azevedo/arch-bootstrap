@@ -48,7 +48,7 @@ if [ -d .git ]; then
 fi
 
 # Source the menu script
-source "whiptail_menus/main_menu.sh"
+source "dialog_menus/main_menu.sh"
 
 # Run the menu
 menu

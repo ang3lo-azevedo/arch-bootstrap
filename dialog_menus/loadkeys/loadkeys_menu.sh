@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Set the directory
-dir=$(dirname "$0")
-
-# Source the utils
-source "$dir/utils/utils.sh"
-
 # Function to show the loadkeys menu
 loadkeys_menu() {
     # Check if pt-latin1 is loaded

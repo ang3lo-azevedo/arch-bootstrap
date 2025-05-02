@@ -20,7 +20,7 @@ archinstall_menu() {
         stty raw -echo -icanon -isig -ixon -iexten
         
         # Run archinstall with custom config
-        yes_no_menu "Run archinstall with custom config?"
+        yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
             archinstall --config "archinstall-config/user_configuration.json"
         else

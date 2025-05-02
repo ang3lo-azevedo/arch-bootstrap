@@ -85,11 +85,13 @@ running_command_menu() {
             --backtitle "$backtitle" \
             --title "$title" \
             --msgbox "$message\n\n$(cat "$temp_file")" \
-            $height $width
+            $height $width \
+            --ok-button "Waiting..." \
+            --no-cancel
         sleep 1
     done
     
-    # Show final output
+    # Show final output with OK button
     whiptail --clear \
         --backtitle "$backtitle" \
         --title "$title" \

@@ -5,9 +5,9 @@ source "bash-utils/utils.sh"
 
 # Function to get version from git
 get_git_version() {
-    # Get the number of commits
-    local commit_count=$(git rev-list --count HEAD 2>/dev/null)
-
+    # Get the number of commits excluding dotfiles
+    local commit_count=$(git rev-list --count HEAD -- . ':!dotfiles/' 2>/dev/null)
+    
     if [ -n "$commit_count" ]; then
         major_version=$(($commit_count / 100))
         minor_version=$(($commit_count / 10))

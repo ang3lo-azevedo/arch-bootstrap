@@ -11,7 +11,7 @@ mount_usb() {
     fi
 
     # Mount the second partition
-    mount "/dev/${ventoy_device}2" /mnt
+    mount "/dev/${ventoy_device}2" /mnt/usb
 }
 
 # Function to run the main menu in the chroot environment
@@ -49,16 +49,16 @@ archinstall_menu() {
             mount_usb
 
             # Get the user_password from the usb
-            #command="$command --user_password $(cat /mnt/user_password)"
+            #command="$command --user_password $(cat /mnt/usb/user_password)"
         fi
 
         # Run the command
-        $command
+        #$command
 
         # If the archinstall succeeds, enter the chroot environment
-        if [ $? -eq 0 ]; then
-            print_status "Entering chroot environment"
-            custom_arch_chroot
-        fi
+        #if [ $? -eq 0 ]; then
+        #    print_status "Entering chroot environment"
+        #    custom_arch_chroot
+        #fi
     fi
 }

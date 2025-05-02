@@ -79,7 +79,6 @@ menu() {
     source "$MENU_DIR/customize_packages/customize_packages_menu.sh"
     customize_packages_menu
 
-
     # Process selected options
     for choice in "${choices[@]}"; do
         if [ -n "${config[$choice]}" ]; then

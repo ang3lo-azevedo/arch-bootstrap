@@ -35,31 +35,8 @@ install_all_menu() {
     fi
 }
 
-# Function to show the main menu
-menu() {
-    # Ensure we have a proper tty
-    exec < /dev/tty
-    exec > /dev/tty
-
-    # Install dialog if not present
-    #install_package "dialog"
-    sudo pacman -S --needed --noconfirm dialog
-
-    # Show the welcome screen
-    welcome_screen
-
-    # Show the rmmod pcspkr menu
-    source "$MENU_DIR/rmmod_pcspkr/rmmod_pcspkr_menu.sh"
-    rmmod_pcspkr_menu
-
-    # Show the loadkeys menu
-    source "$MENU_DIR/loadkeys/loadkeys_menu.sh"
-    loadkeys_menu
-
-    # Show the archinstall menu
-    source "$MENU_DIR/archinstall/archinstall_menu.sh"
-    archinstall_menu
-
+# Function to show the menu after chroot
+menu_after_chroot() {
     # Show the install all menu
     install_all_menu
 
@@ -97,4 +74,30 @@ menu() {
             fi
         fi
     done
+}
+
+# Function to show the main menu
+menu() {
+    # Ensure we have a proper tty
+    exec < /dev/tty
+    exec > /dev/tty
+
+    # Install dialog if not present
+    #install_package "dialog"
+    sudo pacman -S --needed --noconfirm dialog
+
+    # Show the welcome screen
+    welcome_screen
+
+    # Show the rmmod pcspkr menu
+    source "$MENU_DIR/rmmod_pcspkr/rmmod_pcspkr_menu.sh"
+    rmmod_pcspkr_menu
+
+    # Show the loadkeys menu
+    source "$MENU_DIR/loadkeys/loadkeys_menu.sh"
+    loadkeys_menu
+
+    # Show the archinstall menu
+    source "$MENU_DIR/archinstall/archinstall_menu.sh"
+    archinstall_menu
 }

@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Source the bash utils
-source "bash-utils/utils.sh"
+source "../../bash-utils/utils.sh"
 
 # Function to get version from git
 get_git_version() {

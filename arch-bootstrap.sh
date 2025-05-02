@@ -12,14 +12,8 @@ git clone https://github.com/ang3lo-azevedo/arch-bootstrap.git
 # Change to the repository directory
 cd arch-bootstrap || exit
 
-# Get the submodules
-git submodule update --init --recursive
-
-# Source utils
-source "utils/utils.sh"
-
-# Source menu
-source "whiptail_menus/main_menu.sh"
+# Update the repository
+git pull --recurse-submodules
 
 # Run menu
 sudo ./whiptail_menus/main_menu.sh

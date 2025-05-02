@@ -1,9 +1,10 @@
 #! /bin/bash
 
 # Source the utils
-source "../../utils/utils.sh"
+source "utils/utils.sh"
 
 # Set the variables
+MENU_DIR="$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
 backtitle="Ângelo's Arch Linux Installation"
 title="Installation Options"
 height=15

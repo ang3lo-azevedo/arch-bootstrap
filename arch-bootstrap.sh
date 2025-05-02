@@ -1,27 +1,16 @@
 #!/bin/bash
 
-# Check if running in interactive terminal
-if [ ! -t 1 ]; then
-    echo "Script is being run in non-interactive mode. Downloading and executing locally..."
-    # Create a temporary directory
-    TEMP_DIR=$(mktemp -d)
-    cd "$TEMP_DIR" || exit 1
-    
-    # Download the script
-    curl -L arch.azevedos.eu.org -o arch-bootstrap.sh
-    
-    # Make it executable
-    chmod +x arch-bootstrap.sh
-    
-    # Execute it
-    exec ./arch-bootstrap.sh
-fi
-
 # Check if git is installed
 if ! command -v git &> /dev/null; then
     echo "Git is not installed. Installing git..."
-    sudo pacman -Sy
     sudo pacman -S --needed --noconfirm git
+    if [ $? -ne 0 ]; then
+        while [ $? -ne 0 ]; do
+            echo "Failed to install git."
+            sudo pacman -Syu
+            sudo pacman -S --needed --noconfirm git
+        done
+    fi
 else
     echo "Git is already installed."
 fi
@@ -34,8 +23,7 @@ if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
     # Only clone if the directory doesn't exist
     if [ ! -d "$REPO_DIR" ]; then
         echo "Cloning the repository"
-        git config
-        git clone "$REPO_URL"
+        git clone "$REPO_URL" "$REPO_DIR"
     fi
     cd "$REPO_DIR" || exit
 else
@@ -43,9 +31,8 @@ else
 fi
 
 # Update the repository
-if [ -d .git ]; then
-    git pull --recurse-submodules
-fi
+git pull --recurse-submodules
+
 
 # Source the menu script
 source "dialog_menus/main_menu.sh"

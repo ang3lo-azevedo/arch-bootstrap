@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 # Script information
 SCRIPT_NAME="Arch Bootstrap"
-VERSION="1.0.0"
+VERSION="0.0.1"
 AUTHOR="ang3lo-azevedo"
 
 # Function to print colored messages

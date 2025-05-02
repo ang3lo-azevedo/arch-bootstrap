@@ -10,7 +10,3 @@ source "$dir/whiptail_menus/main_menu.sh"
 
 # Run menu
 menu
-
-# Install archpostinstall
-
-# Install dotfiles

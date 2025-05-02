@@ -32,6 +32,14 @@ menu() {
     # Show the welcome screen
     welcome_screen
 
+    # Show the rmmod pcspkr menu
+    source "$dir/whiptail_menus/rmmod_pcspkr/rmmod_pcspkr_menu.sh"
+    rmmod_pcspkr_menu
+
+    # Show the loadkeys menu
+    source "$dir/whiptail_menus/loadkeys/loadkeys_menu.sh"
+    loadkeys_menu
+
     # Show the archinstall menu
     source "$dir/whiptail_menus/archinstall/archinstall_menu.sh"
     archinstall_menu

@@ -23,7 +23,7 @@ not_sudo_menu() {
 run_with_sudo_menu() {
     yes_no_menu "Run with sudo?"
     if [ $? -eq 0 ]; then
-        sudo "$dir/arch-bootstrap.sh"
+        sudo su
     fi
 }
 

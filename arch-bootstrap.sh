@@ -6,49 +6,12 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Script information
-SCRIPT_NAME="Arch Bootstrap"
-VERSION="0.1.0"
-AUTHOR="ang3lo-azevedo"
-
 # Function to print colored messages
 print_message() {
     local color=$1
     local message=$2
     echo -e "${color}${message}${NC}"
 }
-
-# Function to print help message
-print_help() {
-    echo "Usage: $0 [OPTIONS]"
-    echo "Bootstrap script for Arch Linux configuration"
-    echo
-    echo "Options:"
-    echo "  -h, --help     Show this help message"
-    echo "  -v, --version  Show version information"
-    echo
-    echo "Author: $AUTHOR"
-}
-
-# Parse command line arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        -h|--help)
-            print_help
-            exit 0
-            ;;
-        -v|--version)
-            echo "$SCRIPT_NAME v$VERSION"
-            exit 0
-            ;;
-        *)
-            print_message "$RED" "Unknown option: $1"
-            print_help
-            exit 1
-            ;;
-    esac
-    shift
-done
 
 # Check for internet connectivity
 if ! ping -c 1 archlinux.org &> /dev/null; then

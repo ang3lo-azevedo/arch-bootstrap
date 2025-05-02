@@ -4,6 +4,10 @@
 source "bash-utils/utils.sh"
 
 # Set the variables
+SCRIPT_NAME="Ângelo's Arch Linux Installation"
+VERSION="0.1.0"
+AUTHOR="Ângelo Azevedo"
+
 MENU_DIR="$(dirname "$(dirname "${BASH_SOURCE[0]}")")"
 backtitle="Ângelo's Arch Linux Installation"
 title="Installation Options"
@@ -31,7 +35,7 @@ yes_no_menu() {
 
 # Function to show the welcome screen
 welcome_screen() {
-    dialog --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to my Arch Linux Installation \nv$VERSION" $height $width
+    dialog --clear --backtitle "$backtitle" --title "$title" --msgbox "Welcome to $SCRIPT_NAME \nv$VERSION by $AUTHOR" $height $width
 }
 
 # Function to show an input menu

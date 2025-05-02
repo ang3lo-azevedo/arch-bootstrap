@@ -25,40 +25,46 @@ custom_arch_chroot() {
     arch-chroot /mnt /bin/bash -c "$command"
 }
 
+run_archinstall() {
+    local run_all=$1
+
+    # Install archinstall
+    install_package "archinstall"
+    
+    local command="
+        sudo archinstall
+    "
+
+    # Run archinstall with custom config
+    yes_no_menu "Use custom config?"
+    if [ "$run_all" = true ] || [ $? -eq 0 ]; then
+        command="$command --config archinstall-config/user_configuration.json"
+    fi
+    
+    # Get the user_password from the usb
+    yes_no_menu "Get user_password from USB?"
+    if [ "$run_all" = true ] || [ $? -eq 0 ]; then
+        # Mount the USB drive
+        mount_usb
+
+        # Get the user_password from the usb
+        #command="$command --user_password $(cat /mnt/usb/user_password)"
+    fi
+
+    # Run the command
+    #$command
+
+    # If the archinstall succeeds, enter the chroot environment
+    # if [ "$run_all" = true ] || [ $? -eq 0 ]; then
+    #   print_status "Entering chroot environment"
+    #   custom_arch_chroot
+    # fi
+}
+
 # Function to show the archinstall menu
 archinstall_menu() {
     yes_no_menu "Run archinstall?"
     if [ $? -eq 0 ]; then
-        # Install archinstall
-        install_package "archinstall"
-        
-        local command="
-            sudo archinstall
-        "
-
-        # Run archinstall with custom config
-        yes_no_menu "Use custom config?"
-        if [ $? -eq 0 ]; then
-            command="$command --config archinstall-config/user_configuration.json"
-        fi
-        
-        # Get the user_password from the usb
-        yes_no_menu "Get user_password from USB?"
-        if [ $? -eq 0 ]; then
-            # Mount the USB drive
-            mount_usb
-
-            # Get the user_password from the usb
-            #command="$command --user_password $(cat /mnt/usb/user_password)"
-        fi
-
-        # Run the command
-        #$command
-
-        # If the archinstall succeeds, enter the chroot environment
-        #if [ $? -eq 0 ]; then
-        #    print_status "Entering chroot environment"
-        #    custom_arch_chroot
-        #fi
+        run_archinstall
     fi
 }

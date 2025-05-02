@@ -88,6 +88,12 @@ menu() {
     # Show the welcome screen
     welcome_screen
 
+    # Show the run all menu
+    source "$MENU_DIR/run_all_menu.sh"
+    if run_all_menu; then
+        exit 0
+    fi
+
     # Show the rmmod pcspkr menu
     source "$MENU_DIR/rmmod_pcspkr/rmmod_pcspkr_menu.sh"
     rmmod_pcspkr_menu

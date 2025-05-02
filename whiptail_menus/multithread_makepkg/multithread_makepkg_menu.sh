@@ -21,6 +21,8 @@ thread_count_menu() {
 
 # Function to show the multithreading menu
 multithread_makepkg_menu() {
-    yes_no_menu "$multithread_makepkg_menu_message" 
-    thread_count_menu
+    yes_no_menu "$multithread_makepkg_menu_message"
+    if [ $? -eq 0 ]; then
+        thread_count_menu
+    fi
 }

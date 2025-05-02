@@ -3,9 +3,28 @@
 # Source the bash utils
 source "bash-utils/utils.sh"
 
+# Function to get version from git
+get_git_version() {
+    # Try to get the latest tag
+    local git_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+    
+    if [ -n "$git_tag" ]; then
+        # If we have a tag, use it
+        echo "$git_tag"
+    else
+        # If no tag, use commit hash
+        local git_hash=$(git rev-parse --short HEAD 2>/dev/null)
+        if [ -n "$git_hash" ]; then
+            echo "0.0.0-$git_hash"
+        else
+            echo "0.0.0-dev"
+        fi
+    fi
+}
+
 # Set the variables
 SCRIPT_NAME="Ângelo's Arch Linux Installation"
-VERSION="0.1.0"
+VERSION=$(get_git_version)
 AUTHOR="Ângelo Azevedo"
 
 MENU_DIR="$(dirname "$(dirname "${BASH_SOURCE[0]}")")"

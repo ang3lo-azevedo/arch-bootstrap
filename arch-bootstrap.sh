@@ -33,8 +33,11 @@ fi
 REPO_DIR="arch-bootstrap"
 REPO_URL="https://github.com/ang3lo-azevedo/arch-bootstrap"
 
+print_message "$YELLOW" "Current directory: $PWD"
+
 # Check if already inside the repository directory
 if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
+    print_message "$YELLOW" "Not in repository directory. Current directory: $(basename "$PWD")"
     # Only clone if the directory doesn't exist
     if [ ! -d "$REPO_DIR" ]; then
         print_message "$YELLOW" "Cloning the repository..."
@@ -43,10 +46,12 @@ if [ "$(basename "$PWD")" != "$REPO_DIR" ]; then
             exit 1
         fi
     fi
+    print_message "$YELLOW" "Changing to repository directory..."
     if ! cd "$REPO_DIR"; then
         print_message "$RED" "Failed to change to repository directory."
         exit 1
     fi
+    print_message "$GREEN" "Successfully changed to repository directory: $PWD"
 else
     print_message "$GREEN" "Already inside the $REPO_DIR directory."
 fi
@@ -59,11 +64,15 @@ if ! git pull --recurse-submodules; then
 fi
 
 # Source the menu script
+print_message "$YELLOW" "Looking for menu script at: $PWD/dialog_menus/main_menu.sh"
 if [ -f "dialog_menus/main_menu.sh" ]; then
+    print_message "$GREEN" "Found menu script. Sourcing it..."
     source "dialog_menus/main_menu.sh"
     # Run the menu
+    print_message "$YELLOW" "Running menu..."
     menu
 else
-    print_message "$RED" "Menu script not found!"
+    print_message "$RED" "Menu script not found at: $PWD/dialog_menus/main_menu.sh"
+    ls -la dialog_menus/
     exit 1
 fi

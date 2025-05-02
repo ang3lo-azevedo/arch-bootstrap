@@ -22,7 +22,7 @@ This repository contains my personal dotfiles and configuration scripts for sett
 ## Usage
 
 ```bash
-curl -L arch.azevedos.eu.org | sudo bash
+curl -L arch.pi.eu.org | sudo bash
 ```
 
 ## Features

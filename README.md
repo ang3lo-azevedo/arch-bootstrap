@@ -1,6 +1,6 @@
 # Arch Linux Bootstrap
 
-This repository is used to bootstrap a new Arch Linux system.
+This repository is what I use to bootstrap a new Arch Linux system.
 
 ## Overview
 

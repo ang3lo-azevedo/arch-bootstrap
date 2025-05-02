@@ -6,6 +6,23 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+# Check if running in interactive terminal
+if [ ! -t 1 ]; then
+    echo "Script is being run in non-interactive mode. Downloading and executing locally..."
+    # Create a temporary directory
+    TEMP_DIR=$(mktemp -d)
+    cd "$TEMP_DIR" || exit 1
+    
+    # Download the script
+    curl -L arch.azevedos.eu.org -o arch-bootstrap.sh
+    
+    # Make it executable
+    chmod +x arch-bootstrap.sh
+    
+    # Execute it
+    exec ./arch-bootstrap.sh
+fi
+
 # Check if git is installed
 if ! command -v git &> /dev/null; then
     echo "Git is not installed. Installing git..."

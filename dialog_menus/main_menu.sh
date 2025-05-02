@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Get the directory of the script
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Change to the directory of the script
+cd "../"
 
 # Source the bash utils
-source "$SCRIPT_DIR/../bash-utils/utils.sh"
+source "bash-utils/utils.sh"
 
 # Source the menu utils
-source "$SCRIPT_DIR/utils/menu_utils.sh"
+source "dialog_menus/utils/menu_utils.sh"
 
 # Configure variables
 POSTINSTALL_DIR="archpostinstall/install"

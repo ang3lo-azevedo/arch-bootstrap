@@ -14,19 +14,31 @@ custom_arch_chroot() {
     arch-chroot /mnt /bin/bash -c "$command"
 }
 
-# Function to run the full archinstall
-run_full_archinstall() {
+# Function to run archinstall
+run_archinstall() {
+    local command=$1
+    
     # Install archinstall
     install_package "archinstall"
 
-    # Mount the USB drive
-    mount_usb
+    if [ -z "$command" ]; then
+        # Run the full archinstall
+        sudo archinstall --config $CONFIG_FILE
+    else
+        yes_no_menu "Use custom config?"
+        if [ $? -eq 0 ]; then
+            command="$command --config $CONFIG_FILE"
+        fi
 
-    # Get the user_password from the usb
-    local user_password=$(cat $USER_PASSWORD_FILE)
+        # Run the command
+        $command
+    fi
 
-    # Run the full archinstall
-    sudo archinstall --config $CONFIG_FILE --user_password $user_password
+    # If the archinstall succeeds, enter the chroot environment
+    if [ $? -eq 0 ]; then
+        print_status "Entering chroot environment"
+        custom_arch_chroot
+    fi
 }
 
 # Function to show the archinstall menu
@@ -40,19 +52,7 @@ archinstall_menu() {
             sudo archinstall
         "
 
-        # Run archinstall with custom config
-        yes_no_menu "Use custom config?"
-        if [ $? -eq 0 ]; then
-            command="$command --config $CONFIG_FILE"
-        fi
-
-        # Run the command
-        $command
-
-        # If the archinstall succeeds, enter the chroot environment
-        if [ $? -eq 0 ]; then
-            print_status "Entering chroot environment"
-            custom_arch_chroot
-        fi
+        # Run the archinstall
+        run_archinstall "$command"
     fi
 }

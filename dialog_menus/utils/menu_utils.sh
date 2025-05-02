@@ -7,16 +7,13 @@ source "bash-utils/utils.sh"
 get_git_version() {
     # Get the number of commits excluding dotfiles
     local commit_count=$(git rev-list --count HEAD -- . ':!dotfiles/' 2>/dev/null)
-    
-    if [ -n "$commit_count" ]; then
-        major_version=$(($commit_count / 100))
-        minor_version=$(($commit_count / 10))
-        patch_version=$(($commit_count % 10))
 
-        echo "$major_version.$minor_version.$patch_version"
-    else
-        echo "0.0.0-dev"
-    fi
+    major_version=$(($commit_count / 100))
+    minor_version=$(($commit_count / 10))
+    patch_version=$(($commit_count % 10))
+
+    echo "$major_version.$minor_version.$patch_version"
+
 }
 
 # Set the variables
@@ -71,19 +68,14 @@ input_menu() {
     # Get number of threads
     input=$(dialog --clear \
         --backtitle "$BACKTITLE" \
-        --title "$TITLE" \
+        --title "$title" \
         --inputbox "$inputbox" \
         $HEIGHT $WIDTH \
         "$default_value" \
         3>&1 1>&2 2>&3)
     
-    local exit_code=$?
-    if [ $exit_code -eq 0 ]; then
-        choices+=("$choice")
-    else
-        exit_script
-    fi
+    choices+=("$choice")
 
-    # Return the input and exit code
+    # Return the input
     echo "$input"
 }

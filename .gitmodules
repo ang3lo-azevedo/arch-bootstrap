@@ -1,12 +1,9 @@
-[submodule "private"]
-	path = private
-	url = https://github.com/ang3lo-azevedo/bootstrap-private
+[submodule "bash-utils"]
+	path = bash-utils
+	url = https://github.com/ang3lo-azevedo/bash-utils
 [submodule "archpostinstall"]
 	path = archpostinstall
 	url = https://github.com/ang3lo-azevedo/archpostinstall
 [submodule "dotfiles"]
 	path = dotfiles
 	url = https://github.com/ang3lo-azevedo/dotfiles
-[submodule "bash-utils"]
-	path = bash-utils
-	url = https://github.com/ang3lo-azevedo/bash-utils

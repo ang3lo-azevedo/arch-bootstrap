@@ -31,7 +31,8 @@ install_whiptail() {
 yes_no_menu() {
     local message=$1
 
-    whiptail --clear --backtitle "$backtitle" --title "$title" --yesno "$message" $height $width
+    whiptail --clear --backtitle "$backtitle" --title "$title" --yes-button "Yes" --no-button "No" --cancel-button "Cancel" --yesno "$message" $height $width
+    exit
 }
 
 # Function to show the welcome screen
@@ -46,60 +47,25 @@ input_menu() {
     local inputbox=$3
     local default_value=$4 || $cpu_cores
 
-    if [ $? -eq 0 ]; then
-        choices+=("$choice")
-        # Get number of threads
-        input=$(whiptail --clear \
-            --backtitle "$backtitle" \
-            --title "$title" \
-            --inputbox "$inputbox" \
-            "$height" "$width" \
-            "$default_value" \
-            3>&1 1>&2 2>&3)
-        # If user cancels thread input, remove the choice from choices
-        if [ $? -ne 0 ]; then
-            choices=("${choices[@]/$choice}")
-        fi
-    fi
-
-    # Return the input
-    echo "$input"
-}
-
-# Function to show a command output menu
-running_command_menu() {
-    local command=$1
-    local title=$2
-    local message=$3
-    
-    # Create a temporary file for the output
-    local temp_file=$(mktemp)
-    
-    # Execute the command in background and redirect output to temp file
-    (eval "$command" 2>&1 | tee "$temp_file") &
-    local pid=$!
-    
-    # Show the output in real-time using whiptail
-    while kill -0 $pid 2>/dev/null; do
-        whiptail --clear \
-            --backtitle "$backtitle" \
-            --title "$title" \
-            --msgbox "$message\n\n$(cat "$temp_file")" \
-            $height $width \
-            --ok-button "Waiting..." \
-            --no-cancel
-        sleep 1
-    done
-    
-    # Show final output with OK button
-    whiptail --clear \
+    # Get number of threads
+    input=$(whiptail --clear \
         --backtitle "$backtitle" \
         --title "$title" \
-        --msgbox "$message\n\n$(cat "$temp_file")" \
-        $height $width
+        --inputbox "$inputbox" \
+        --ok-button "OK" \
+        --cancel-button "Cancel" \
+        "$height" "$width" \
+        "$default_value" \
+        3>&1 1>&2 2>&3)
     
-    # Clean up
-    rm -f "$temp_file"
+    local exit_code=$?
+    if [ $exit_code -eq 0 ]; then
+        choices+=("$choice")
+    fi
+
+    # Return the input and exit code
+    echo "$input"
+    return $exit_code
 }
 
 # Function to show a package installation menu

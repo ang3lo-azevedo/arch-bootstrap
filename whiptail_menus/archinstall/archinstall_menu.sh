@@ -11,7 +11,7 @@ archinstall_menu() {
         source "whiptail_menus/run_with_sudo/run_with_sudo_menu.sh"
 
         # Install archinstall
-        install_package_menu "archinstall"
+        install_package "archinstall"
 
         # Run archinstall with custom config
         yes_no_menu "Run archinstall with custom config?"

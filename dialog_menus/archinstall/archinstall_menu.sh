@@ -13,9 +13,9 @@ archinstall_menu() {
             exec < /dev/tty
             exec > /dev/tty
         if [ $? -eq 0 ]; then
-            sudo archinstall --config archinstall-config/user_configuration.json
+            sudo archinstall --config archinstall-config/user_configuration.json --no-chroot
         else
-            sudo archinstall
+            sudo archinstall --no-chroot
         fi
 
         # If the archinstall succeeds, enter the chroot environment

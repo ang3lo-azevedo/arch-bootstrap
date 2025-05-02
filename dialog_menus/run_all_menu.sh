@@ -17,4 +17,5 @@ run_all_menu() {
         source "dialog_menus/archinstall/archinstall_menu.sh"
         run_archinstall true
     fi
+    return 0
 }

@@ -25,8 +25,9 @@ custom_arch_chroot() {
     arch-chroot /mnt /bin/bash -c "$command"
 }
 
+# Function to run archinstall
 run_archinstall() {
-    local run_all=$1
+    local run_all=$1 || false
 
     # Install archinstall
     install_package "archinstall"
@@ -65,6 +66,6 @@ run_archinstall() {
 archinstall_menu() {
     yes_no_menu "Run archinstall?"
     if [ $? -eq 0 ]; then
-        run_archinstall
+        run_archinstall false
     fi
 }

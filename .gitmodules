@@ -1,12 +1,12 @@
-[submodule "archpostinstall"]
-	path = archpostinstall
-	url = https://github.com/ang3lo-azevedo/archpostinstall
-[submodule "archinstall-config"]
-	path = archinstall-config
-	url = https://github.com/ang3lo-azevedo/archinstall-config
-[submodule "dotfiles"]
-	path = dotfiles
-	url = https://github.com/ang3lo-azevedo/dotfiles
 [submodule "private"]
 	path = private
 	url = https://github.com/ang3lo-azevedo/bootstrap-private
+[submodule "archinstall-config"]
+	path = archinstall-config
+	url = https://github.com/ang3lo-azevedo/archinstall-config
+[submodule "archpostinstall"]
+	path = archpostinstall
+	url = https://github.com/ang3lo-azevedo/archpostinstall
+[submodule "dotfiles"]
+	path = dotfiles
+	url = https://github.com/ang3lo-azevedo/dotfiles

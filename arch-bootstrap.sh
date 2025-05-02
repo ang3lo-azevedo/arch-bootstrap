@@ -54,7 +54,7 @@ fi
 
 # Update the repository
 print_message "$YELLOW" "Updating repository..."
-if ! git pull --recurse-submodules; then
+if ! git pull && git submodule update --recursive; then
     print_message "$RED" "Failed to update repository."
     exit 1
 fi

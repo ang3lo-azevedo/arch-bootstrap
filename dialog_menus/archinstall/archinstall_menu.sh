@@ -19,32 +19,37 @@ custom_arch_chroot() {
 
 # Function to run archinstall
 run_archinstall() {
-    local command=$1
+    local is_run_all=$1
+    local command="sudo archinstall"
     
     # Install archinstall
     install_package "archinstall"
 
-    if [ -z "$command" ]; then
-        # Run the full archinstall
-        sudo archinstall --config $CONFIG_FILE
-    else
+    if [ -z "$is_run_all" ]; then
         yes_no_menu "Use custom config?"
         if [ $? -eq 0 ]; then
             command="$command --config $CONFIG_FILE"
         fi
-
-        # Check if the USB drive is mounted
-        source "$MENU_DIR/utils/usb_utils.sh"
-        if is_usb_mounted; then
-            yes_no_menu "Use password config from USB drive?"
-            if [ $? -eq 0 ] && [ -f "$MOUNT_POINT/archinstall-config/password_configuration.json" ]; then
-                command="$command --config $MOUNT_POINT/archinstall-config/password_configuration.json"
-            fi
-        fi
-
-        # Run the command
-        $command
+    else
+        command="$command --config $CONFIG_FILE"
     fi
+
+    # Check if the USB drive is mounted
+    source "$MENU_DIR/utils/usb_utils.sh"
+    if is_usb_mounted && [ -f "$MOUNT_POINT/$CONFIG_FILE" ]; then
+        if [ -z "$is_run_all" ]; then
+            yes_no_menu "Use password config from USB drive?"
+            if [ $? -eq 0 ]; then
+                command="$command --config $MOUNT_POINT/$CONFIG_FILE"
+            fi
+        else
+            command="$command --config $MOUNT_POINT/$CONFIG_FILE"
+        fi
+    fi
+    
+
+    # Run the command
+    $command
 
     # If the archinstall succeeds, enter the chroot environment
     if [ $? -eq 0 ]; then
@@ -65,6 +70,6 @@ archinstall_menu() {
         "
 
         # Run the archinstall
-        run_archinstall "$command"
+        run_archinstall 0
     fi
 }

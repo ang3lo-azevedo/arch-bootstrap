@@ -33,6 +33,15 @@ run_archinstall() {
             command="$command --config $CONFIG_FILE"
         fi
 
+        # Check if the USB drive is mounted
+        source "$MENU_DIR/utils/usb_utils.sh"
+        if is_usb_mounted; then
+            yes_no_menu "Use password config from USB drive?"
+            if [ $? -eq 0 ] && [ -f "$MOUNT_POINT/archinstall-config/password_configuration.json" ]; then
+                command="$command --config $MOUNT_POINT/archinstall-config/password_configuration.json"
+            fi
+        fi
+
         # Run the command
         $command
     fi

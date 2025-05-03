@@ -51,7 +51,8 @@ run_archinstall() {
     # Run the command
     $command
 
-    wait 60
+    # Wait 60 seconds
+    sleep 60
 
     # If the archinstall succeeds, enter the chroot environment
     if [ $? -eq 0 ]; then

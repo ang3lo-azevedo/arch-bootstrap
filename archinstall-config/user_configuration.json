@@ -9,19 +9,18 @@
         "config_type": "manual_partitioning",
         "device_modifications": [
             {
-                "device": "/dev/nvme0n1",
+                "device": "/dev/sda",
                 "partitions": [
                     {
                         "btrfs": [],
                         "dev_path": null,
                         "flags": [
-                            "boot",
-                            "esp"
+                            "boot"
                         ],
                         "fs_type": "fat32",
                         "mount_options": [],
                         "mountpoint": "/boot",
-                        "obj_id": "27d3140f-3bb1-4a61-8532-6a63e44de1bf",
+                        "obj_id": "8fa150c8-cbd2-43a4-ba6e-83cd6defd56f",
                         "size": {
                             "sector_size": {
                                 "unit": "B",
@@ -36,7 +35,7 @@
                                 "value": 512
                             },
                             "unit": "MiB",
-                            "value": 1
+                            "value": 3
                         },
                         "status": "create",
                         "type": "primary"
@@ -48,14 +47,14 @@
                         "fs_type": "ext4",
                         "mount_options": [],
                         "mountpoint": "/",
-                        "obj_id": "9aa9a61e-45e7-4e45-b33d-aa82cdeff42c",
+                        "obj_id": "604a5007-de8a-452c-bc83-425fb6f6110a",
                         "size": {
                             "sector_size": {
                                 "unit": "B",
                                 "value": 512
                             },
                             "unit": "B",
-                            "value": 511035047936
+                            "value": 20397948928
                         },
                         "start": {
                             "sector_size": {
@@ -63,7 +62,7 @@
                                 "value": 512
                             },
                             "unit": "B",
-                            "value": 1074790400
+                            "value": 1076887552
                         },
                         "status": "create",
                         "type": "primary"
@@ -77,7 +76,7 @@
         "encryption_type": "luks",
         "lvm_volumes": [],
         "partitions": [
-            "9aa9a61e-45e7-4e45-b33d-aa82cdeff42c"
+            "604a5007-de8a-452c-bc83-425fb6f6110a"
         ]
     },
     "hostname": "pc-angelo",
@@ -121,6 +120,11 @@
         "mpv"
     ],
     "parallel_downloads": 0,
+    "profile_config": {
+        "gfx_driver": null,
+        "greeter": null,
+        "profile": {}
+    },
     "services": [],
     "swap": true,
     "timezone": "Europe/Lisbon",

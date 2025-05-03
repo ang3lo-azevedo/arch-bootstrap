@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CONFIG_FILE="archinstall-config/user_configuration.json"
-CREDENTIALS_FILE="archinstall-config/user_credentials.json"
 
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
@@ -37,22 +36,23 @@ run_archinstall() {
 
     # Check if the USB drive is mounted
     source "$MENU_DIR/utils/usb_utils.sh"
-    if is_usb_mounted && [ -f "$MOUNT_POINT/$CREDENTIALS_FILE" ]; then
+    local creds_file="$MOUNT_POINT/archinstall-config/user_credentials.json"
+    if is_usb_mounted && [ -f "$creds_file" ]; then
         if [ -z "$is_run_all" ]; then
             yes_no_menu "Use credentials from USB drive?"
             if [ $? -eq 0 ]; then
-                command="$command --creds $MOUNT_POINT/$CREDENTIALS_FILE"
+                command="$command --creds $creds_file"
             fi
         else
-            command="$command --creds $MOUNT_POINT/$CREDENTIALS_FILE"
+            command="$command --creds $creds_file"
         fi
     fi
     
+
     # Run the command
     $command
 
-    # Wait 60 seconds
-    sleep 60
+    
 
     # If the archinstall succeeds, enter the chroot environment
     if [ $? -eq 0 ]; then

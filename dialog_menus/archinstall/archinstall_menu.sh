@@ -1,7 +1,5 @@
 #!/bin/bash
 
-CONFIG_FILE="archinstall-config/user_configuration.json"
-
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
     local script_dir="dialog_menus"
@@ -25,34 +23,41 @@ run_archinstall() {
     # Install archinstall
     install_package "archinstall"
 
-    if [ -z "$is_run_all" ]; then
-        yes_no_menu "Use custom config?"
-        if [ $? -eq 0 ]; then
-            command="$command --config $CONFIG_FILE"
-        fi
-    else
-        command="$command --config $CONFIG_FILE"
-    fi
-
-    # Check if the USB drive is mounted
+    # Check if the USB drive is mounted# Check if the USB drive is mounted
     source "$MENU_DIR/utils/usb_utils.sh"
     local creds_file="$MOUNT_POINT/archinstall-config/user_credentials.json"
-    if is_usb_mounted && [ -f "$creds_file" ]; then
-        if [ -z "$is_run_all" ]; then
-            yes_no_menu "Use credentials from USB drive?"
-            if [ $? -eq 0 ]; then
+    local config_file="$MOUNT_POINT/archinstall-config/user_configuration.json"
+
+    if is_usb_mounted; then
+        # Check if the config file exists
+        if [ -f "$config_file" ]; then
+            # If the config file exists, check if the user wants to use it
+            if [ -z "$is_run_all" ]; then
+                yes_no_menu "Use custom config?"
+                if [ $? -eq 0 ]; then
+                    command="$command --config $config_file"
+                fi
+            else
+                command="$command --config $config_file"
+            fi
+        fi
+
+        # Check if the credentials file exists
+        if [ -f "$creds_file" ]; then
+            # If the credentials file exists, check if the user wants to use it
+            if [ -z "$is_run_all" ]; then
+                yes_no_menu "Use credentials from USB drive?"
+                if [ $? -eq 0 ]; then
+                    command="$command --creds $creds_file"
+                fi
+            else
                 command="$command --creds $creds_file"
             fi
-        else
-            command="$command --creds $creds_file"
         fi
     fi
-    
 
     # Run the command
     $command
-
-    
 
     # If the archinstall succeeds, enter the chroot environment
     if [ $? -eq 0 ]; then

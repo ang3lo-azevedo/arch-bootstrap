@@ -41,6 +41,14 @@ parallel_downloads=0
 # Function to handle script exit
 exit_script() {
     dialog --clear --backtitle "$BACKTITLE" --title "Exit" --msgbox "Installation cancelled. Exiting..." $HEIGHT $WIDTH
+
+    # Source the USB utils
+    source "usb_utils.sh"
+
+    # Unmount the USB drive
+    unmount_usb
+
+    # Exit the script
     exit 0
 }
 

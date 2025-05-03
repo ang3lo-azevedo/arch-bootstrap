@@ -14,8 +14,17 @@ LUKS_MAPPER="usb_luks"
 
 # Function to mount the USB drive
 mount_usb() {
+    # Check if the USB drive exists
+    if [ ! -b "$USB_DRIVE" ]; then
+        print_error "USB drive not found"
+        return 1
+    fi
+
     # Check if the USB drive is mounted
-    is_usb_mounted
+    if is_usb_mounted; then
+        print_success "USB drive already mounted at $MOUNT_POINT"
+        return
+    fi
 
     # Create the mount point
     sudo mkdir -p "$MOUNT_POINT"
@@ -42,14 +51,5 @@ unmount_usb() {
 
 # Function to check if the USB drive is mounted
 is_usb_mounted() {
-    if [ -z "$(lsblk | grep "$USB_DRIVE")" ]; then
-        print_error "USB drive not found"
-        return 1
-    fi
-
-    if mountpoint -q "$MOUNT_POINT"; then
-        print_success "USB drive mounted at $MOUNT_POINT"
-    else
-        print_info "USB drive found but not mounted"
-    fi
+    return "$(mountpoint -q "$MOUNT_POINT")"
 }

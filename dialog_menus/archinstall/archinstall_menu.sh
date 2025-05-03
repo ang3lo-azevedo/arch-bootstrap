@@ -4,11 +4,14 @@ CONFIG_FILE="archinstall-config/user_configuration.json"
 
 # Function to run the main menu in the chroot environment
 custom_arch_chroot() {
+    local script_dir="dialog_menus"
+    local script_name="menu_after_chroot.sh"
+
     local command="
         git clone $REPO_URL $REPO_DIR
-        cd $REPO_DIR
-        sudo chmod +x dialog_menus/menu_after_chroot.sh
-        ./dialog_menus/menu_after_chroot.sh
+        cd $REPO_DIR/$script_dir
+        sudo chmod +x $script_name
+        ./$script_name
     "
 
     arch-chroot /mnt /bin/bash -c "$command"

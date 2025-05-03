@@ -85,6 +85,12 @@ menu() {
     # Install dialog if not present
     install_package "dialog"
 
+    # Source the USB utils
+    source "$MENU_DIR/utils/usb_utils.sh"
+
+    # Mount the USB drive
+    mount_usb
+
     # Show the welcome screen
     welcome_screen
 

@@ -91,6 +91,8 @@ menu() {
     # Mount the USB drive
     mount_usb
 
+    pause "Press any key to continue..."
+
     # Show the welcome screen
     welcome_screen
 

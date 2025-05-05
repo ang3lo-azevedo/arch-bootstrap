@@ -17,16 +17,18 @@ curl -L arch.pi.eu.org | sudo bash
 
 ## TODO
 
+- [ ] Add a config menu to choose what to install and configure
+- [ ] Add a way to use [archinstall](https://wiki.archlinux.org/title/Archinstall) to install the base system and ask or get the config
+- [ ] Install yay automatically on archinstall and all the packages
+- [ ] See if is possible to install the [chaotic-aur](https://aur.chaotic.cx/) and the [endevouros repo](https://forum.endeavouros.com/t/adding-endeavour-os-repo-on-arch-linux/16444) on archinstall and use them to install the packages
+- [ ] Add probably [chezmoi](https://www.chezmoi.io/) to manage the dotfiles
+- [ ] Add [ansible](https://www.ansible.com/) to configure the system
+- [ ] Configure all the post-installation scripts
+
+## Post-installation scripts
+- [ ] Add multithreading to the makepkg on the post-installation script
+- [ ] Add pacman parallel downloading to the post-installation script
+- [ ] Use [nvidia-inst](https://small.bloat.cat/@pranav072bex/comprehensive-guide-to-installing-and-managing-nvidia-driver-on-arch-linux-ubuntu-93eb0e11ce50) to install the nvidia driver
+- [ ] Automatically configure KVM
+- [ ] Add [endevouros repo](https://forum.endeavouros.com/t/adding-endeavour-os-repo-on-arch-linux/16444) to the post-installation script
 - [ ] Add [nvidia-inst](https://small.bloat.cat/@pranav072bex/comprehensive-guide-to-installing-and-managing-nvidia-driver-on-arch-linux-ubuntu-93eb0e11ce50) to the post-installation script
-- [ ] Add persistence in ventoy so that I can get the my user passwords from the usb
-- [ ] Improve the overall code
-- [ ] Add a way to import the dotfiles
-- [ ] Configure [chezmoi](https://www.chezmoi.io/) to manage the dotfiles
-
-### Tools Used
-- **archinstall**: [archinstall](https://wiki.archlinux.org/title/Archinstall) - A tool for setting up a fresh Arch Linux installation
-- **archpostinstall**: [archpostinstall](https://github.com/ang3lo-azevedo/archpostinstall) - A tool for the post-installation of Arch Linux
-
-## Features
-
-- Installs and configures my Arch Linux system with all my packages, configurations and dotfiles.
